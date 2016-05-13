@@ -1,0 +1,30 @@
+#!/bin/bash
+
+source lib/utils.sh
+
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
+set -e
+
+working_directory=`pwd`
+
+# Check ssh key
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+    fancy_echo "Setup your ssh key before continuing"
+fi
+
+# Check pgp key
+if [ ! -f ~/.gnupg/pubring.gpg ]; then
+    fancy_echo "Setup your pgp key before continuing"
+fi
+
+# Root User
+cd $working_directory
+sudo -u root bash ./debian.root
+
+# Home User
+cd $working_directory
+bash ./debian.local
+
+# Cleanup
+$HOME/bin/i3exit reboot
