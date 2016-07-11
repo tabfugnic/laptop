@@ -10,12 +10,14 @@ working_directory=`pwd`
 
 # Check ssh key
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
-    fancy_echo "Setup your ssh key before continuing"
+    fancy_echo "Setup ssh key before continuing"
+    exit 1
 fi
 
 # Check pgp key
 if [ ! -f ~/.gnupg/pubring.gpg ]; then
-    fancy_echo "Setup your pgp key before continuing"
+    fancy_echo "Setup pgp key before continuing"
+    exit 1
 fi
 
 # Root User
