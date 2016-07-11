@@ -23,9 +23,7 @@ install_dotfiles() {
     fancy_echo "Install dotfiles"
     cd ~/dev
     git clone git@github.com:tabfugnic/dotfiles.git || true
-    cd dotfiles
-    git pull origin master
-    ./scripts/setup
+    env RCRC=$HOME/dev/dotfiles/rcrc rcup
 }
 
 install_git_completions() {
