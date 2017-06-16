@@ -50,8 +50,9 @@ install_mu4e() {
     fancy_echo "Install Mu4e"
 
     cd /tmp
-    git clone https://github.com/djcb/mu.git || true
-    cd mu
+    wget https://github.com/djcb/mu/releases/download/0.9.18/mu-0.9.18.tar.gz
+    tar -xzvf mu-0.9.18.tar.gz
+    cd mu-0.9.18
     autoreconf -i && ./configure && make
     make install
 }
@@ -63,7 +64,7 @@ cleanup_excess_programs() {
 }
 
 configure_postgres() {
-    postgres_path=/etc/postgresql/9.5/main
+    postgres_path=/etc/postgresql/9.6/main
     cp $support_directory/pg_hba.conf $postgres_path/pg_hba.conf
     cp $support_directory/postgresql.conf $postgres_path/postgresql.conf
     chown postgres:postgres $postgres_path/*.conf
@@ -125,7 +126,7 @@ apt_install "gstreamer1.0-tools"
 apt_install "gstreamer1.0-x"
 
 # Emacs
-apt_install "emacs24"
+apt_install "emacs25"
 install_mu4e
 
 # Programming Languages
