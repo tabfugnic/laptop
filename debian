@@ -10,13 +10,13 @@ working_directory=`pwd`
 
 # Check ssh key
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
-    fancy_echo "Setup ssh key before continuing"
+    error_echo "Setup ssh key before continuing"
     exit 1
 fi
 
 # Check pgp key
-if [ ! -f ~/.gnupg/pubring.gpg ]; then
-    fancy_echo "Setup pgp key before continuing"
+if [ ! -f ~/.gnupg/pubring.kbx ] && [ ! -f ~/.gnupg/pubring.gpg ]; then
+    error_echo "Setup pgp key before continuing"
     exit 1
 fi
 
