@@ -24,6 +24,9 @@ fi
 cd $working_directory
 sudo -u root bash ./debian.root
 
+# Postgres User
+sudo -H -u postgres bash -c 'createuser $USER -s -d -r'
+
 # Home User
 cd $working_directory
 bash ./debian.local
