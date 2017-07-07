@@ -47,7 +47,7 @@ add_ssh_key_to_github() {
          https://api.github.com/user/keys
 }
 
-add_ssh_key_to_github() {
+add_ssh_key_to_heroku() {
     heroku keys:add
 }
 
