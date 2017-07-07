@@ -114,6 +114,8 @@ apt_install "postgresql"
 # GPG
 apt_install "gnupg2"
 apt_install "gnupg-agent"
+apt_install "dirmngr"
+apt_install "pinentry-gtk2"
 
 # Browser
 apt_install "firefox-esr"
