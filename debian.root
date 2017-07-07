@@ -110,6 +110,7 @@ apt_install "xterm"
 
 # Postgres
 apt_install "postgresql"
+apt_install "libpq-dev"
 
 # GPG
 apt_install "gnupg2"
@@ -122,7 +123,7 @@ apt_install "firefox-esr"
 
 # QT
 apt_install "qt5-default"
-apt_install "libqt5webkit5"
+apt_install "libqt5webkit5-dev"
 apt_install "gstreamer1.0-plugins-base"
 apt_install "gstreamer1.0-tools"
 apt_install "gstreamer1.0-x"
@@ -146,6 +147,8 @@ apt_install "ctags"
 apt_install "global"
 apt_install "command-not-found"
 apt_install "locate"
+apt_install "alsa-utils"
+apt_install "imagemagick"
 apt_install "rcm"
 apt_install "parity"
 install_heroku_toolbelt
