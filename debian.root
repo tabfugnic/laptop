@@ -130,7 +130,10 @@ apt_install "gstreamer1.0-x"
 
 # Emacs
 apt_install "emacs25"
+
+# Mail
 install_mu4e
+apt_install "msmtp"
 
 # Programming Languages
 apt_install "ghc"
