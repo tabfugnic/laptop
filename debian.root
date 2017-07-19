@@ -79,87 +79,16 @@ fancy_echo "Update entire system"
 update_upgrade_system
 
 fancy_echo "Install packages"
-
-# Baseline
-apt_install "aptitude"
-apt_install "autoconf"
-apt_install "build-essential"
-apt_install "git"
-apt_install "glib2.0-dev"
-apt_install "gmime-2.6"
-apt_install "libgio2.0"
-apt_install "libtool"
-apt_install "libxapian-dev"
-apt_install "pkg-config"
-apt_install "texinfo"
-apt_install "upower"
-apt_install "x11-xserver-utils"
-apt_install "xbacklight"
-apt_install "xserver-xorg"
-
-# Desktop components
-apt_install "dmenu"
-apt_install "dunst"
-apt_install "feh"
-apt_install "i3-wm"
-apt_install "i3lock"
-apt_install "i3status"
-apt_install "xautolock"
-apt_install "xinit"
-apt_install "xterm"
-
-# Postgres
-apt_install "postgresql"
-apt_install "libpq-dev"
-
-# GPG
-apt_install "gnupg2"
-apt_install "gnupg-agent"
-apt_install "dirmngr"
-apt_install "pinentry-gtk2"
-
-# Browser
-apt_install "firefox-esr"
-
-# QT
-apt_install "qt5-default"
-apt_install "libqt5webkit5-dev"
-apt_install "gstreamer1.0-plugins-base"
-apt_install "gstreamer1.0-tools"
-apt_install "gstreamer1.0-x"
-
-# Emacs
-apt_install "emacs25"
-
-# Mail
+apt-get install -y `cat $support_path/programs`
 install_mu4e
-apt_install "msmtp"
-
-# Programming Languages
-apt_install "ghc"
 install_chruby
 install_ruby_install
-
-# Utilities
-apt_install "pass"
-apt_install "redshift"
-apt_install "scrot"
-apt_install "xvfb"
-apt_install "silversearcher-ag"
-apt_install "ctags"
-apt_install "global"
-apt_install "command-not-found"
-apt_install "locate"
-apt_install "alsa-utils"
-apt_install "imagemagick"
-apt_install "rcm"
-apt_install "parity"
 install_heroku_toolbelt
 
-# Configure
+fancy_echo "Configure packages"
 update-command-not-found &
 updatedb &
 configure_postgres
 
-# Cleanup
+fancy_echo "Cleanup excess software"
 cleanup_excess_programs
