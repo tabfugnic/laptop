@@ -27,6 +27,7 @@ libglib2.0-dev
 libnotify-bin
 libpq-dev
 libqt5webkit5-dev
+libsqlite3-dev
 libtool
 libxapian-dev
 locate
