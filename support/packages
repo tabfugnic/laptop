@@ -22,6 +22,7 @@ i3-wm
 i3lock
 i3status
 imagemagick
+isync
 libgio2.0
 libglib2.0-dev
 libnotify-bin
@@ -37,6 +38,7 @@ pass
 pinentry-gtk2
 pkg-config
 postgresql
+pv
 qt5-default
 rcm
 redshift
