@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source lib/utils.sh
+
+working_directory=`pwd`
+support_directory=$working_directory/support
+
+fancy_echo "Install base packages"
+apt-get update
+apt-get install -y `cat $support_directory/dependencies`

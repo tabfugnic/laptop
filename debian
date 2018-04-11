@@ -15,17 +15,22 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 fi
 
 # Check pgp key
-if [ ! -f ~/.gnupg/pubring.kbx ] && [ ! -f ~/.gnupg/pubring.gpg ]; then
+if [ ! -f ~/.gnupg/pubring.kbx ]; then
     error_echo "Setup pgp key before continuing"
     exit 1
 fi
+
+# Install required dependencies
+cd $working_directory
+sudo -u root bash ./debian.base
 
 # Root User
 cd $working_directory
 sudo -u root bash ./debian.root
 
 # Postgres User
-sudo -H -u postgres bash -c 'createuser $USER -s -d -r'
+cd $working_directory
+sudo -H -u postgres bash -c 'createuser $USER -s -d -r' || true
 
 # Home User
 cd $working_directory

@@ -70,6 +70,7 @@ configure_postgres() {
     chown postgres:postgres $postgres_path/*.conf
     chmod 640 $postgres_path/pg_hba.conf
     chmod 644 $postgres_path/postgresql.conf
+    /etc/init.d/postgresql start
 }
 
 fancy_echo "Use debian testing and thoughtbot sources"
@@ -79,7 +80,7 @@ fancy_echo "Update entire system"
 update_upgrade_system
 
 fancy_echo "Install packages"
-apt-get install -y `cat $support_path/programs`
+apt-get install -y `cat $support_directory/packages`
 install_mu4e
 install_chruby
 install_ruby_install

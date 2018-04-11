@@ -7,6 +7,7 @@ set -e
 public_ssh_key=`cat ~/.ssh/id_rsa.pub`
 working_directory=`pwd`
 support_directory=$working_directory/support
+github_domain="${GITHUB_DOMAIN:-git@github.com:}"
 
 install_bundler() {
     fancy_echo "Install Bundler"
@@ -22,8 +23,8 @@ setup_directories() {
 install_dotfiles() {
     fancy_echo "Install dotfiles"
     cd ~/dev
-    git clone git@github.com:tabfugnic/dotfiles.git || true
-    env RCRC=$HOME/dev/dotfiles/rcrc rcup
+    git clone "${github_domain}tabfugnic/dotfiles.git" || true
+    env RCRC=$HOME/dev/dotfiles/rcrc rcup -f
 }
 
 install_git_completions() {

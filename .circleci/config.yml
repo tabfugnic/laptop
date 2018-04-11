@@ -4,9 +4,53 @@ jobs:
     working_directory: "~/laptop"
     docker:
       - image: debian:testing
-
+        environment:
+          GITHUB_DOMAIN: https://github.com/
+          LAPTOP_ENV: test
     steps:
       - checkout
       - run:
+          name: Set keyboard configuration
+          command: debconf-set-selections < ./.circleci/keyboard.conf
+      - run:
+          name: Set locale configuration
+          command: |
+            apt-get update
+            apt-get install -y locales
+            sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+            locale-gen
+            update-locale
+      - run:
+          name: Create fake ssh public key
+          command: |
+            mkdir ~/.ssh
+            touch ~/.ssh/id_rsa.pub
+      - run:
+          name: Create fake gpg public key
+          command: |
+            mkdir ~/.gnupg
+            touch ~/.gnupg/pubring.kbx
+      - run:
+          name: Install sudo
+          command: |
+            apt-get update
+            apt-get install -y sudo
+      - run:
           name: Install Base Laptop
           command: ./debian
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  monthly:
+    triggers:
+      - schedule:
+          cron: "0 0 0 1 * ?"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
