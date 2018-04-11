@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    working_directory: "~/laptop"
+    docker:
+      - image: debian:testing
+
+    steps:
+      - checkout
+      - run:
+          name: Install Base Laptop
+          command: ./debian
