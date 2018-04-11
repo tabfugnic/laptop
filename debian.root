@@ -64,7 +64,7 @@ cleanup_excess_programs() {
 }
 
 configure_postgres() {
-    postgres_path=/etc/postgresql/9.6/main
+    postgres_path=/etc/postgresql/10/main
     cp $support_directory/pg_hba.conf $postgres_path/pg_hba.conf
     cp $support_directory/postgresql.conf $postgres_path/postgresql.conf
     chown postgres:postgres $postgres_path/*.conf
