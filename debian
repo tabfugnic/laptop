@@ -8,6 +8,18 @@ set -e
 
 working_directory=`pwd`
 
+while getopts ":v" opt; do
+    case $opt in
+        v)
+            export VERBOSE=true
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            ;;
+    esac
+done
+
+
 # Check ssh key
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     error_echo "Setup ssh key before continuing"
@@ -26,11 +38,7 @@ sudo -u root bash ./debian.base
 
 # Root User
 cd $working_directory
-sudo -u root bash ./debian.root
-
-# Postgres User
-cd $working_directory
-sudo -H -u postgres bash -c 'createuser $USER -s -d -r' || true
+sudo -u root bash ./debian.root $USER
 
 # Home User
 cd $working_directory
@@ -38,3 +46,4 @@ bash ./debian.local
 
 # Cleanup
 $HOME/bin/i3exit reboot
+unset VERBOSE

@@ -5,3 +5,15 @@ fancy_echo() {
 error_echo() {
     printf "\n\e[31m---------$1---------\e[0m\n"
 }
+
+runner() {
+    if [ -n "$2" ]; then
+      fancy_echo "$2"
+    fi
+
+    if [ -z "$VERBOSE" ]; then
+       $1 >/dev/null
+    else
+       $1
+    fi
+}

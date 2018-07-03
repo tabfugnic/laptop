@@ -10,18 +10,15 @@ support_directory=$working_directory/support
 github_domain="${GITHUB_DOMAIN:-git@github.com:}"
 
 install_bundler() {
-    fancy_echo "Install Bundler"
     gem install bundler
 }
 
 setup_directories() {
-    fancy_echo "Creating directories"
     mkdir ~/dev || true
     mkdir ~/tmp || true
 }
 
 install_dotfiles() {
-    fancy_echo "Install dotfiles"
     cd ~/dev
     git clone "${github_domain}tabfugnic/dotfiles.git" || true
     env RCRC=$HOME/dev/dotfiles/rcrc rcup -f
@@ -37,7 +34,6 @@ install_parity() {
 }
 
 install_ruby() {
-    fancy_echo "Install ruby version"
     ruby-install ruby --no-reinstall
     . /usr/local/share/chruby/chruby.sh
     chruby ruby
@@ -52,10 +48,9 @@ add_ssh_key_to_heroku() {
     heroku keys:add
 }
 
-setup_directories
-
-install_ruby
-install_bundler
-install_dotfiles
-install_git_completions
-install_parity
+runner setup_directories "Setup Directories needed for installation"
+runner install_ruby "Install Ruby"
+runner install_bundler "Install bundler"
+runner install_dotfiles "Install dotfiles"
+runner install_git_completions "Install git completions"
+runner install_parity "Install parity"
