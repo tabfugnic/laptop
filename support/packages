@@ -3,6 +3,7 @@ aptitude
 autoconf
 build-essential
 command-not-found
+curl
 dirmngr
 dunst
 emacs25
