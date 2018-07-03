@@ -78,6 +78,7 @@ configure_postgres() {
     sudo -H -u postgres bash -c "createuser $user -s -d -r" || true
 }
 
+echo $user
 fancy_echo "sudo -H -u postgres bash -c \"createuser $user -s -d -r\" || true"
 
 fancy_echo "Install necessary packages"
