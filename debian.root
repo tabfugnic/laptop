@@ -75,10 +75,10 @@ configure_postgres() {
     chmod 640 $postgres_path/pg_hba.conf
     chmod 644 $postgres_path/postgresql.conf
     /etc/init.d/postgresql start
-    sudo -H -u postgres bash -c 'createuser $user -s -d -r' || true
+    sudo -H -u postgres bash -c "createuser $user -s -d -r" || true
 }
 
-fancy_echo "sudo -H -u postgres bash -c 'createuser $user -s -d -r' || true"
+fancy_echo "sudo -H -u postgres bash -c \"createuser $user -s -d -r\" || true"
 
 fancy_echo "Install necessary packages"
 runner install_apt_sources "Install apt sources"
