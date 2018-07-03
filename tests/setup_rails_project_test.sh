@@ -1,32 +1,33 @@
 #!/bin/bash
 
 source lib/utils.sh
+source tests/helper.sh $temp_directory
 
 build_rails_app_test() {
-    # Use some ruby
-    chruby ruby
+  setup_ruby
+  expect gem install rails
 
-    # Move to development directory
-    cd ~/dev
+  # Create test app
+  expect "rails new test_app"
+  cd test_app
 
-    # Install suspenders
-    gem install suspenders
+  expect bundle install
 
-    # Create test app
-    suspenders test_app
-    cd test_app
+  # Create an article
+  expect rails generate model Article content title
 
-    # Run setup
-    ./bin/setup
+  # run migration
+  expect rake db:migrate
 
-    # Create an article
-    rails generate model Article content title
+  # run tests
+  expect rake
+}
 
-    # run migration
-    rake db:migrate
+setup_ruby() {
+  . /usr/local/share/chruby/chruby.sh
+  . /usr/local/share/chruby/auto.sh
 
-    # run tests
-    rspec
+  chruby ruby
 }
 
 fancy_echo "Build Rails App Test"
