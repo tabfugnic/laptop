@@ -12,7 +12,7 @@ runner() {
     fi
 
     if [ -z "$VERBOSE" ]; then
-      $1 > /dev/null 2>&1
+      $1 > $HOME/logfile.txt 2>&1
     else
        $1
     fi
