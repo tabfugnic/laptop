@@ -2,7 +2,7 @@
 
 source lib/utils.sh
 
-trap 'ret=$?; test $ret -ne 0 && tail $HOME/logfile.txt >&2; exit $ret' EXIT
+trap print_error_and_exit EXIT
 
 set -e
 

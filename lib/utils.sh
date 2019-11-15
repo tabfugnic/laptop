@@ -17,3 +17,9 @@ runner() {
        $1
     fi
 }
+
+print_error_and_exit() {
+  ret=$?
+  [ $ret -ne 0 ] && tail $HOME/logfile.txt >&2
+  exit $ret
+}
