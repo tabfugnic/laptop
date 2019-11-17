@@ -12,14 +12,14 @@ runner() {
     fi
 
     if [ -z "$VERBOSE" ]; then
-      $1 > $HOME/logfile.txt 2>&1
+      $1 > ./logfile.txt 2>&1
     else
-       $1
+      $1
     fi
 }
 
 print_error_and_exit() {
   ret=$?
-  [ $ret -ne 0 ] && tail $HOME/logfile.txt >&2
+  [ $ret -ne 0 ] && tail ./logfile.txt >&2
   exit $ret
 }
