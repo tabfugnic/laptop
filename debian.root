@@ -64,12 +64,10 @@ cleanup_excess_programs() {
 }
 
 configure_postgres() {
-    postgres_path=/etc/postgresql/10/main
+    postgres_path=/etc/postgresql/*/main
     cp $support_directory/pg_hba.conf $postgres_path/pg_hba.conf
-    cp $support_directory/postgresql.conf $postgres_path/postgresql.conf
     chown postgres:postgres $postgres_path/*.conf
     chmod 640 $postgres_path/pg_hba.conf
-    chmod 644 $postgres_path/postgresql.conf
     /etc/init.d/postgresql start
 }
 
