@@ -1,0 +1,4 @@
+if [ ! -f ~/.gnupg/pubring.kbx ]; then
+  error_echo "Setup pgp key before continuing"
+  exit 1
+fi

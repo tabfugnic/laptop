@@ -1,40 +1,82 @@
-#!/bin/bash
-
-source lib/utils.sh
-
-trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+#!/usr/bin/env bash
 
 set -e
 
-working_directory=`pwd`
+catch_error() {
+  ret=$?
+  test $ret -ne 0 && error_echo "failed" >&2
+  exit $ret
+}
 
-# Check ssh key
-if [ ! -f ~/.ssh/id_rsa.pub ]; then
-    error_echo "Setup ssh key before continuing"
-    exit 1
-fi
+cleanup() {
+  fancy_echo "Cleaning up and rebooting"
+  sudo apt clean
+  sudo apt autoclean
+  sudo apt autoremove
+  sudo reboot || true
+}
 
-# Check pgp key
-if [ ! -f ~/.gnupg/pubring.kbx ]; then
-    error_echo "Setup pgp key before continuing"
-    exit 1
-fi
+consistent_echo() {
+  string=$1
+  string_length=$(echo $string | wc -m)
+  space_character_length=$((($MAX_ECHO_LENGTH - $string_length) / 2))
+  filler=$(printf -v dash '%*s' $space_character_length ''; printf '%s' ${dash// /$SPACE_CHARACTER})
 
-# Install required dependencies
-cd $working_directory
-sudo -u root bash ./debian.base
+  echo $filler$string$filler
+}
 
-# Root User
-cd $working_directory
-sudo -u root bash ./debian.root
+fancy_echo() {
+  string=$(consistent_echo "$1")
+  printf "\n\e[32m$string\e[0m\n"
+}
 
-# Postgres User
-cd $working_directory
-sudo -H -u postgres bash -c 'createuser $USER -s -d -r' || true
+error_echo() {
+  string=$(consistent_echo "$1")
+  printf "\n\e[31m$string\e[0m\n"
+}
 
-# Home User
-cd $working_directory
-bash ./debian.local
+terminal_width() {
+  if [ -z "$TERM" ]; then
+    tput cols
+  else
+    echo 50
+  fi
+}
 
-# Cleanup
-$HOME/bin/i3exit reboot
+run_build() {
+  local build_file=$1
+
+  while read config; do
+    fancy_echo "Running configuration for '$config'"
+    source $BUILDS_DIRECTORY/$config
+    cd $WORKING_DIRECTORY
+  done < "$build_file"
+}
+
+trap catch_error EXIT
+
+WORKING_DIRECTORY=`pwd`
+SUPPORT_DIRECTORY=$WORKING_DIRECTORY/support
+BUILDS_DIRECTORY=$WORKING_DIRECTORY/builds
+MAX_ECHO_LENGTH=$(terminal_width)
+SPACE_CHARACTER="-"
+
+machine_type=${1:-laptop}
+
+fancy_echo "Running system install of $machine_type for $(id)"
+
+fancy_echo "Checking system before installation"
+run_build "$SUPPORT_DIRECTORY/required.build"
+
+fancy_echo "Installing required setup packages"
+< "$SUPPORT_DIRECTORY/base.packages" xargs sudo apt -y install
+
+fancy_echo "Running setup build"
+run_build "$SUPPORT_DIRECTORY/setup.build"
+
+sudo apt update
+< "$SUPPORT_DIRECTORY/$machine_type.packages" xargs sudo apt -y install
+
+run_build "$SUPPORT_DIRECTORY/$machine_type.build"
+
+cleanup

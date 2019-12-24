@@ -1,0 +1,10 @@
+postgres_path=/etc/postgresql/12/main
+
+sudo cp $SUPPORT_DIRECTORY/pg_hba.conf $postgres_path/pg_hba.conf
+sudo cp $SUPPORT_DIRECTORY/postgresql.conf $postgres_path/postgresql.conf
+sudo chown postgres:postgres $postgres_path/*.conf
+sudo chmod 640 $postgres_path/pg_hba.conf
+sudo chmod 644 $postgres_path/postgresql.conf
+sudo /etc/init.d/postgresql start
+
+sudo -H -u postgres bash -c 'createuser $USER -s -d -r' || true

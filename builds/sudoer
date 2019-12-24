@@ -1,0 +1,4 @@
+if ! groups | grep -qw 'sudo\|root'; then
+   echo "Please add user to sudo group first"
+   exit 1
+fi

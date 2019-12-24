@@ -1,0 +1,8 @@
+github_domain="${GITHUB_DOMAIN:-git@github.com:}"
+
+mkdir ~/dev || true
+mkdir ~/tmp || true
+
+cd ~/dev
+git clone "${github_domain}tabfugnic/dotfiles.git" || true
+env RCRC=$HOME/dev/dotfiles/rcrc rcup -f
