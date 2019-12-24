@@ -40,7 +40,7 @@ terminal_width() {
   if [ -z "$TERM" ]; then
     tput cols
   else
-    50
+    echo 50
   fi
 }
 
