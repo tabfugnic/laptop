@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source lib/utils.sh
-
 set -e
 
 catch_error() {
