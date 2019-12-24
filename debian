@@ -36,6 +36,14 @@ error_echo() {
   printf "\n\e[31m$string\e[0m\n"
 }
 
+terminal_width() {
+  if [ -z "$TERM" ]; then
+    tput cols
+  else
+    50
+  fi
+}
+
 run_build() {
   local build_file=$1
 
@@ -51,7 +59,7 @@ trap catch_error EXIT
 WORKING_DIRECTORY=`pwd`
 SUPPORT_DIRECTORY=$WORKING_DIRECTORY/support
 BUILDS_DIRECTORY=$WORKING_DIRECTORY/builds
-MAX_ECHO_LENGTH=$(tput cols)
+MAX_ECHO_LENGTH=$(terminal_width)
 SPACE_CHARACTER="-"
 
 machine_type=${1:-laptop}
