@@ -1,0 +1,4 @@
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+  error_echo "Setup ssh key before continuing"
+  exit 1
+fi
