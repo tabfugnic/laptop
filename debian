@@ -64,7 +64,7 @@ SPACE_CHARACTER="-"
 
 machine_type=${1:-laptop}
 
-fancy_echo "Running system install of $machine_type for $USER"
+fancy_echo "Running system install of $machine_type for $(id)"
 
 fancy_echo "Checking system before installation"
 run_build "$SUPPORT_DIRECTORY/required.build"
