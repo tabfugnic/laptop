@@ -1,3 +1,3 @@
-! groups | grep -qw 'sudo' &&
+! groups | grep -qw 'sudo\|root' &&
 echo "Please add user to sudo group first" &&
 exit 1
