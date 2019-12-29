@@ -13,8 +13,7 @@ cleanup() {
   sudo apt clean
   sudo apt autoclean
   sudo apt autoremove
-
-  sudo reboot
+  sudo reboot || true
 }
 
 consistent_echo() {
