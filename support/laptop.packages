@@ -10,7 +10,6 @@ feh
 firefox-esr
 git
 global
-gmime
 gnupg-agent
 gnupg2
 gstreamer1.0-plugins-base
@@ -23,6 +22,7 @@ imagemagick
 isync
 libgio2.0
 libglib2.0-dev
+libgmime-3.0-dev
 libnotify-bin
 libpq-dev
 libqt5webkit5-dev

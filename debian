@@ -70,13 +70,13 @@ fancy_echo "Checking system before installation"
 run_build "$SUPPORT_DIRECTORY/required.build"
 
 fancy_echo "Installing required setup packages"
-sudo apt -y install "$SUPPORT_DIRECTORY/base.packages"
+< "$SUPPORT_DIRECTORY/base.packages" xargs sudo apt -y install
 
 fancy_echo "Running setup build"
 run_build "$SUPPORT_DIRECTORY/setup.build"
 
 sudo apt update
-sudo apt -y install "$SUPPORT_DIRECTORY/$machine_type.packages"
+< "$SUPPORT_DIRECTORY/$machine_type.packages" xargs sudo apt -y install
 
 run_build "$SUPPORT_DIRECTORY/$machine_type.build"
 
