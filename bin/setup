@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+bin/cleanup || true
+
+docker build -t "laptop:latest" .
+
+docker run --name laptop -it laptop:latest
