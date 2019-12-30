@@ -4,12 +4,20 @@ set -e
 
 catch_error() {
   ret=$?
+  exec 1>&3 2>&4
   test $ret -ne 0 && error_echo "failed" >&2
+  tail -n50 ./logfile.txt >&2
+  cleanup
   exit $ret
 }
 
 cleanup() {
+  rm ./logfile.txt
+}
+
+finalize() {
   fancy_echo "Cleaning up and rebooting"
+  cleanup
   sudo apt clean
   sudo apt autoclean
   sudo apt autoremove
@@ -43,12 +51,20 @@ terminal_width() {
   fi
 }
 
+capture_output() {
+  if [ -z "$VERBOSE" ]; then
+    $@ 3>&1 4>&2 1> ./logfile.txt 2>&1
+  else
+    $@
+  fi
+}
+
 run_build() {
   local build_file=$1
 
   while read config; do
     fancy_echo "Running configuration for '$config'"
-    source $BUILDS_DIRECTORY/$config
+    capture_output source $BUILDS_DIRECTORY/$config
     cd $WORKING_DIRECTORY
   done < "$build_file"
 }
@@ -61,7 +77,19 @@ BUILDS_DIRECTORY=$WORKING_DIRECTORY/builds
 MAX_ECHO_LENGTH=$(terminal_width)
 SPACE_CHARACTER="-"
 
-machine_type=${1:-laptop}
+machine_type=laptop
+if [[ "$1" != -* ]]; then
+  machine_type=$1
+  OPTIND=2
+fi
+
+while getopts "z" options; do
+  case $options in
+    z)
+      VERBOSE=true
+      ;;
+  esac
+done
 
 fancy_echo "Running system install of $machine_type for $(id)"
 
@@ -69,14 +97,14 @@ fancy_echo "Checking system before installation"
 run_build "$SUPPORT_DIRECTORY/required.build"
 
 fancy_echo "Installing required setup packages"
-< "$SUPPORT_DIRECTORY/base.packages" xargs sudo apt -y install
+capture_output < "$SUPPORT_DIRECTORY/base.packages" xargs sudo apt -y install
 
 fancy_echo "Running setup build"
 run_build "$SUPPORT_DIRECTORY/setup.build"
 
 sudo apt update
-< "$SUPPORT_DIRECTORY/$machine_type.packages" xargs sudo apt -y install
+capture_output < "$SUPPORT_DIRECTORY/$machine_type.packages" xargs sudo apt -y install
 
 run_build "$SUPPORT_DIRECTORY/$machine_type.build"
 
-cleanup
+finalize
