@@ -69,7 +69,7 @@ run_build() {
   done < "$build_file"
 }
 
-trap catch_error EXIT
+trap catch_error ERR
 
 WORKING_DIRECTORY=`pwd`
 SUPPORT_DIRECTORY=$WORKING_DIRECTORY/support
@@ -108,7 +108,7 @@ capture_output < "$SUPPORT_DIRECTORY/$machine_type.packages" xargs sudo apt -y i
 run_build "$SUPPORT_DIRECTORY/$machine_type.build"
 
 fancy_echo "Add users to $machine_type groups"
-capture_output < "sudo usermod -aG $($SUPPORT_DIRECTORY/$machine_type.groups $USER)"
+capture_output "sudo usermod -aG $(paste -sd ',' $SUPPORT_DIRECTORY/$machine_type.groups) $USER"
 
 
 finalize
