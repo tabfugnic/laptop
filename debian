@@ -78,7 +78,7 @@ MAX_ECHO_LENGTH=$(terminal_width)
 SPACE_CHARACTER="-"
 
 machine_type=laptop
-if [[ "$1" != -* ]]; then
+if [[ ! -z "$1" && "$1" != -* ]]; then
   machine_type=$1
   OPTIND=2
 fi
