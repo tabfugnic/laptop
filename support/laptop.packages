@@ -20,7 +20,7 @@ i3lock
 i3status
 imagemagick
 isync
-libgio2.0
+libgio-cil
 libglib2.0-dev
 libgmime-3.0-dev
 libnotify-bin
