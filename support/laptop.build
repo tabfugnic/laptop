@@ -2,3 +2,5 @@ heroku
 mu4e
 postgres
 ruby
+rust
+xidlehook

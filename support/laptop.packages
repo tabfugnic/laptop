@@ -29,6 +29,7 @@ libqt5webkit5-dev
 libsqlite3-dev
 libtool
 libxapian-dev
+libxcb-screensaver0-dev
 locate
 msmtp
 parity
@@ -46,7 +47,6 @@ suckless-tools
 texinfo
 upower
 x11-xserver-utils
-xautolock
 xbacklight
 xinit
 xserver-xorg

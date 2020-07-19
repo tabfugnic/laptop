@@ -107,4 +107,8 @@ capture_output < "$SUPPORT_DIRECTORY/$machine_type.packages" xargs sudo apt -y i
 
 run_build "$SUPPORT_DIRECTORY/$machine_type.build"
 
+fancy_echo "Add users to $machine_type groups"
+capture_output < "sudo usermod -aG $($SUPPORT_DIRECTORY/$machine_type.groups $USER)"
+
+
 finalize
