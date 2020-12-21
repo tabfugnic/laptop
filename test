@@ -1,0 +1,32 @@
+#!/bin/bash
+
+working_directory=`pwd`
+export temp_directory=`mktemp -d`
+echo "0,0" > $temp_directory/results.txt
+
+exec 1>./logs/test.log &>2
+
+
+cd $temp_directory
+
+results() {
+  successful_tests=`cut -d ',' -f1 $temp_directory/results.txt`
+  failed_tests=`cut -d ',' -f2 $temp_directory/results.txt`
+  printf "\nFailed Tests: $failed_tests" &> /dev/tty
+  printf "\nSuccessful Tests: $successful_tests\n" &> /dev/tty
+}
+
+cleanup() {
+  fancy_echo "cleaning up"
+  cd $working_directory
+
+  results
+
+  rm -rf "$temp_directory"
+}
+trap cleanup EXIT
+
+ln -s $working_directory/lib/ $temp_directory/lib
+ln -s $working_directory/tests/ $temp_directory/tests
+
+bash tests/*.test
