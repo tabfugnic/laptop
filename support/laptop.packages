@@ -1,5 +1,6 @@
 autoconf
 build-essential
+byzanz
 command-not-found
 curl
 dirmngr
@@ -43,6 +44,7 @@ rcm
 redshift
 scrot
 silversearcher-ag
+slop
 suckless-tools
 texinfo
 upower
@@ -52,3 +54,4 @@ xinit
 xserver-xorg
 xterm
 xvfb
+zenity
