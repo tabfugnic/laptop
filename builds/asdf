@@ -1,0 +1,10 @@
+install_asdf() {
+  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.8.0
+  source $HOME/.asdf/asdf.sh
+  asdf update
+}
+
+install_asdf
+
+unset -f install_ruby_install
+unset -f install_chruby

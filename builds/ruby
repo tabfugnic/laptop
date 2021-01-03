@@ -1,28 +1,3 @@
-install_chruby() {
-  cd /tmp
-  wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
-  tar -xzvf chruby-0.3.9.tar.gz
-  cd chruby-0.3.9/
-  sudo ./scripts/setup.sh
-}
+asdf plugin add ruby
 
-install_ruby_install() {
-  local version=0.7.0
-
-  cd /tmp
-  wget -O ruby-install-$version.tar.gz https://github.com/postmodern/ruby-install/archive/v$version.tar.gz
-  tar -xzvf ruby-install-$version.tar.gz
-  cd ruby-install-$version/
-  sudo make install
-}
-
-install_chruby
-install_ruby_install
-
-ruby-install ruby --no-reinstall
-source /usr/local/share/chruby/chruby.sh
-chruby ruby
-gem install bundler
-
-unset -f install_ruby_install
-unset -f install_chruby
+asdf install ruby latest
