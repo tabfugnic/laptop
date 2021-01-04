@@ -1,4 +1,4 @@
-postgres_path=/etc/postgresql/12/main
+postgres_path=/etc/postgresql/13/main
 
 sudo cp $SUPPORT_DIRECTORY/pg_hba.conf $postgres_path/pg_hba.conf
 sudo cp $SUPPORT_DIRECTORY/postgresql.conf $postgres_path/postgresql.conf
