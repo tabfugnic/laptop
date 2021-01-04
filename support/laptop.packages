@@ -2,6 +2,7 @@ autoconf
 build-essential
 byzanz
 command-not-found
+cups
 curl
 dirmngr
 dunst
