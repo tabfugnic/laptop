@@ -39,7 +39,7 @@ pinentry-gtk2
 pkg-config
 postgresql
 pv
-qt5-default
+qtbase5-dev
 rcm
 redshift
 scrot

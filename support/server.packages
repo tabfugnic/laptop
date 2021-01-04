@@ -24,7 +24,7 @@ pass
 pkg-config
 postgresql
 pv
-qt5-default
+qtbase5-dev
 rcm
 silversearcher-ag
 suckless-tools
