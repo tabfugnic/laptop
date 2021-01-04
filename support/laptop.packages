@@ -28,6 +28,7 @@ libnotify-bin
 libpq-dev
 libqt5webkit5-dev
 libsqlite3-dev
+libssl-dev
 libtool
 libxapian-dev
 libxcb-screensaver0-dev

@@ -17,6 +17,7 @@ libglib2.0-dev
 libnotify-bin
 libpq-dev
 libsqlite3-dev
+libssl-dev
 libtool
 libxapian-dev
 locate
