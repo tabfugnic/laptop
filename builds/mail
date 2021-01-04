@@ -1,5 +1,5 @@
 mu4e_install() {
-  local version="1.2"
+  local version="1.4.14"
   wget https://github.com/djcb/mu/releases/download/$version/mu-$version.0.tar.xz
   tar -xJvf mu-$version.0.tar.xz
   cd mu-$version.0
