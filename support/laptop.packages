@@ -39,6 +39,7 @@ pass
 pinentry-gtk2
 pkg-config
 postgresql
+pulseaudio
 pv
 qtbase5-dev
 rcm
