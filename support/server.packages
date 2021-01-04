@@ -1,6 +1,7 @@
 autoconf
 build-essential
 command-not-found
+cups
 curl
 dirmngr
 emacs
