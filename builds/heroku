@@ -1,2 +1,4 @@
-cd /tmp
-wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+if ! command -v heroku > /dev/null; then
+  cd /tmp
+  curl https://cli-assets.heroku.com/install-ubuntu.sh | sudo sh
+fi

@@ -1,10 +1,13 @@
 mu4e_install() {
-  local version="1.4.14"
-  wget https://github.com/djcb/mu/releases/download/$version/mu-$version.tar.xz
-  tar -xJvf mu-$version.tar.xz
-  cd mu-$version
-  autoreconf -i && ./configure && make
-  sudo make install
+  if ! command -v mu > /dev/null; then
+    cd /tmp
+    local version="1.4.14"
+    wget https://github.com/djcb/mu/releases/download/$version/mu-$version.tar.xz
+    tar -xJvf mu-$version.tar.xz
+    cd mu-$version
+    autoreconf -i && ./configure && make
+    sudo make install
+  fi
 }
 
 mail_configure() {
