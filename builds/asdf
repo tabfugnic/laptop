@@ -4,7 +4,12 @@ install_asdf() {
   asdf update
 }
 
-install_asdf
+setup_asdf_package() {
+  git clone git@github.com:tabfugnic/asdf.el $HOME/dev/tabfugnic/asdf.el
+}
 
-unset -f install_ruby_install
-unset -f install_chruby
+install_asdf
+setup_asdf_package
+
+unset -f install_asdf
+unset -f setup_asdf_package
