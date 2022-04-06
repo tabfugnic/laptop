@@ -1,3 +1,4 @@
+aptitude
 autoconf
 build-essential
 byzanz
@@ -17,6 +18,8 @@ gnupg2
 gstreamer1.0-plugins-base
 gstreamer1.0-tools
 gstreamer1.0-x
+fonts-hack
+fonts-hack-ttf
 i3-wm
 i3lock
 i3status
@@ -42,6 +45,7 @@ pkg-config
 postgresql
 pulseaudio
 pv
+py3status
 qtbase5-dev
 rcm
 redshift
