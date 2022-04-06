@@ -1,4 +1,4 @@
-postgres_path="$(readlink -f /etc/postgresql/1*/main | tail -1)"
+postgres_path="$(readlink -f /etc/postgresql/*/main | tail -1)"
 
 sudo cp $SUPPORT_DIRECTORY/pg_hba.conf $postgres_path/pg_hba.conf
 sudo cp $SUPPORT_DIRECTORY/postgresql.conf $postgres_path/postgresql.conf
