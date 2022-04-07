@@ -1,7 +1,7 @@
 github_domain="${GITHUB_DOMAIN:-git@github.com:}"
 
-mkdir ~/dev || true
-mkdir ~/tmp || true
+mkdir -p $HOME/dev
+mkdir -p $HOME/tmp
 
 cd ~/dev
 git clone "${github_domain}tabfugnic/dotfiles.git" || true
