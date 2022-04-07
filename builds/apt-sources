@@ -2,7 +2,7 @@ apt_directory=/etc/apt
 
 sudo cp $SUPPORT_DIRECTORY/sources.list $apt_directory/sources.list
 sudo cp $SUPPORT_DIRECTORY/thoughtbot.list $apt_directory/sources.list.d/thoughtbot.list
-wget -qO - https://apt.thoughtbot.com/thoughtbot.gpg.key | sudo apt-key add -
+sudo wget -q https://apt.thoughtbot.com/thoughtbot.gpg.key -O /etc/apt/trusted.gpg.d/thoughtbot.gpg
 
 sudo apt update -y
 sudo apt upgrade -y
