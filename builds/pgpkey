@@ -1,4 +1,13 @@
-if [ ! -f ~/.gnupg/pubring.kbx ]; then
-  error_echo "Setup pgp key before continuing"
-  exit 1
-fi
+gpg --keyserver keys.openpgp.org --recv-key D9E3837A4D8CBFB56746D95609638B3E786F8224
+
+cat > $HOME/.gnupg/gpg-agent.conf <<EOF
+default-cache-ttl 3000
+enable-ssh-support
+EOF
+
+cat > $HOME/.gnupg/gpg.conf <<EOF
+default-key 786F8224
+keyserver hkp://keys.openpgp.org
+keyserver-options auto-key-retrieve
+use-agent
+EOF
