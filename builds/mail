@@ -11,8 +11,7 @@ mu4e_install() {
 }
 
 mail_configure() {
-  mkdir -p $HOME/mail/personal
-  mkdir -p $HOME/mail/thoughtbot
+  mkdir -p $HOME/.mail/personal
 
   sudo cp $SUPPORT_DIRECTORY/msmtp/* /usr/local/bin/.
 
