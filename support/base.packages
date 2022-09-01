@@ -1,4 +1,5 @@
 gnupg2
 locales
+net-tools
 scdaemon
 wget

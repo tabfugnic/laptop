@@ -25,6 +25,7 @@ i3lock
 i3status
 imagemagick
 isync
+kitty
 libgio-cil
 libglib2.0-dev
 libgmime-3.0-dev
@@ -38,6 +39,7 @@ libxapian-dev
 libxcb-screensaver0-dev
 locate
 msmtp
+mu4e
 parity
 pass
 pinentry-gtk2
@@ -47,6 +49,7 @@ pulseaudio
 pv
 py3status
 qtbase5-dev
+qutebrowser
 rcm
 redshift
 scrot
