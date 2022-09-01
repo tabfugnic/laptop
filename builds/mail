@@ -1,17 +1,6 @@
-mu4e_install() {
-  if ! command -v mu > /dev/null; then
-    cd /tmp
-    local version="1.6.10"
-    wget https://github.com/djcb/mu/releases/download/$version/mu-$version.tar.xz
-    tar -xJvf mu-$version.tar.xz
-    cd mu-$version
-    autoreconf -i && ./configure && make
-    sudo make install
-  fi
-}
-
 mail_configure() {
   mkdir -p $HOME/.mail/personal
+  mkdir -p $HOME/.mail/work
 
   sudo cp $SUPPORT_DIRECTORY/msmtp/* /usr/local/bin/.
 
@@ -23,7 +12,5 @@ mail_configure() {
 }
 
 
-mu4e_install
 mail_configure
-unset -f mu4e_install
 unset -f mail_configure
