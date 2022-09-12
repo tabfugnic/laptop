@@ -1,0 +1,3 @@
+xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+mkdir -p $HOME/downloads
+ln -s $HOME/downloads $HOME/Downloads
