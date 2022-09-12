@@ -1,0 +1,4 @@
+sudo cp $SUPPORT_DIRECTORY/pop.list $apt_directory/sources.list.d/.
+curl -fsSL "https://packagecloud.io/pop/pop/gpgkey" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/pop_pop-archive-keyring.gpg
+sudo apt update
+sudo apt install pop
